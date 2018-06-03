@@ -13,6 +13,12 @@ x = sym.Symbol('x')
 y = sym.Symbol('y')
 a = sym.Symbol('a')
 b = sym.Symbol('b')
+
+R = sym.Symbol('R', constant = True)
+S = sym.Symbol('S', constant = True)
+T = sym.Symbol('T', constant = True)
+P = sym.Symbol('P', constant = True)
+
 D = sym.Matrix(([[x, y], [a, b]]))
 D[:,1] = [[1],[1]]
 
@@ -36,5 +42,9 @@ v2 = sym.det(D2)/sym.det(D)
 v3 = sym.det(D3)/sym.det(D)
 v4 = sym.det(D4)/sym.det(D)
 
-sx = 3*v1 + 0 * v2 + 5 * v3 + 1 * v4
-print(sym.diff(v1,p1))
+up = 3*sym.det(D1) + 5 * sym.det(D2) + 0 * sym.det(D3) + 1 * sym.det(D4)
+down = sym.det(D)
+
+diff_up = sym.diff(up,p1)*down - up * sym.diff(down, p1)
+diff_down = down**2
+print(sym.diff(diff_up,p1))
