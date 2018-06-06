@@ -21,6 +21,11 @@ f13 = R*p - S*p + S
 f14 = R*p - S*p + S
 f15 = R*p - S*p + S
 
+exprs = [f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15]
+
+# check for greatest
+check_index = 0
+
 s = Solver()
 s.add(T>R, R>P, P>S)
 s.add(2*R > T+S)
@@ -29,9 +34,14 @@ s.add(q1>0,q1<1)
 s.add(q2>0,q2<1)
 s.add(q3>0,q3<1)
 s.add(q4>0,q4<1)
-s.add(f0>f1)
-result = s.check()
-if result == sat:
-    print(s.model())
-else:
-    print("unsat")
+for i in range(len(exprs)):
+    if (i == check_index):
+        continue
+    s.push()
+    s.add(exprs[check_index] < exprs[i])
+    result = s.check()
+    if result == sat:
+        print(i,s.model())
+    else:
+        print(i,"unsat")
+    s.pop()
