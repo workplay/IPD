@@ -5,7 +5,7 @@ import numpy as np
 # initial vector converge to stationary according to Markov matrix
 def sVector_converge(p=[0.5,0.5,0.5,0.5],q=[0.5,0.5,0.5,0.5],v0=[0.9,0,0.1,0],debug = False): 
     M = markovmatrix(p,q)
-    for i in range(100):
+    for i in range(10000):
         if (debug):
             print('[' + ', '.join('%1.3f' % v for v in v0) + ']')
         v0 = np.dot(v0, M)
@@ -39,8 +39,8 @@ def sVector_cal(p=[0.5,0.5,0.5,0.5],q=[0.5,0.5,0.5,0.5]):
     return [v1,v2,v3,v4]
 
 def main():
-    pprint(sVector_cal(p=[0.7,0.2,0.3,0.4], q=[0.5,0.6,0.7,0.8]))
-    pprint(sVector_converge(p=[0.7,0.2,0.3,0.4], q=[0.5,0.6,0.7,0.8]))
+    pprint(sVector_cal(p=[0.999,0.001,0.001,0.001], q=[0.999,0.001,0.001,0.001]))
+    pprint(sVector_converge(p=[1,0.00,0.00,0.00], q=[1,0.00,0.00,0.00], v0=[0,1,0,0]))
   
 if __name__== "__main__":
     main()

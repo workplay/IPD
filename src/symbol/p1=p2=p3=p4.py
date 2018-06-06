@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 import sympy as sym
-p1 = sym.Symbol('p1')
-p2 = sym.Symbol('p2')
-p3 = sym.Symbol('p3')
-p4 = sym.Symbol('p4')
+p = sym.Symbol('p')
 q1 = sym.Symbol('q1')
 q2 = sym.Symbol('q2')
 q3 = sym.Symbol('q3')
@@ -19,13 +16,10 @@ S = sym.Symbol('S', constant = True)
 T = sym.Symbol('T', constant = True)
 P = sym.Symbol('P', constant = True)
 
-D = sym.Matrix(([[x, y], [a, b]]))
-D[:,1] = [[1],[1]]
-
 D = sym.Matrix( \
-    [ [ p1-1, p2-1, p3, p4],  \
+    [ [ p-1, p-1, p, p],  \
       [ q1-1, q3, q2-1, q4],  \
-      [ p1*q1-1, p2*q3, p3*q2, p4*q4 ], \
+      [ p*q1-1, p*q3, p*q2, p*q4 ], \
       [ 1, 1, 1, 1] ]);
 D1 = D.copy()
 D2 = D.copy()
@@ -46,6 +40,16 @@ up = R*sym.det(D1) + T * sym.det(D2) + S * sym.det(D3) + P * sym.det(D4)
 down = sym.det(D)
 result = up/down
 
-diff_up = sym.diff(up,p1)*down - up * sym.diff(down, p1)
-diff_down = down**2
-print(sym.diff(diff_up,p1))
+NumToSign = {1:'-',0:'+'}
+
+for i1 in range(2):
+    for i2 in range(2):
+        for i3 in range(2):
+            for i4 in range(2):
+                sy = result
+                sy = sym.limit(sy,q1,i1,NumToSign[i1])
+                sy = sym.limit(sy,q2,i2,NumToSign[i2])
+                sy = sym.limit(sy,q3,i3,NumToSign[i3])
+                sy = sym.limit(sy,q4,i4,NumToSign[i4])
+                # print(i1,i2,i3,i4,':',sy,':',sy.subs(R,3).subs(T,5).subs(P,1).subs(S,0),":" "%.3f" % sy.subs(R,3).subs(T,5).subs(P,1).subs(S,0).subs(p,0.5))
+                print(sy)
