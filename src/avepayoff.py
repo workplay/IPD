@@ -9,7 +9,7 @@ def avePayoff_cal(p,q):
     return [payoff_p, payoff_q]
 
 def main():
-    print(avePayoff_cal([0.5,0.5,0.5,0.5],[0.5,0.5,0.5,0.5]))
+    print(avePayoff_cal([0.999,0.999,0.001,0.001],[0.999,0.999,0.001,0.001]))
   
 if __name__== "__main__":
     main()

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import sympy as sym
+
 p1 = sym.Symbol('p1')
 p2 = sym.Symbol('p2')
 p3 = sym.Symbol('p3')
@@ -43,6 +45,21 @@ up = R*sym.det(D1) + T * sym.det(D2) + S * sym.det(D3) + P * sym.det(D4)
 down = sym.det(D)
 result = up/down
 
-diff_up = sym.diff(up,p1)*down - up * sym.diff(down, p1)
-diff_down = down**2
-print(sym.diff(diff_up,p1))
+NumToSign = {1:'-',0:'+'}
+
+import sys
+sys.stdout = open(r'../../data/SymbolicResult.csv','wt')
+
+for i1 in range(2):
+    for i2 in range(2):
+        for i3 in range(2):
+            for i4 in range(2):
+                sy = result
+                sy = sym.limit(sy,q1,i1,NumToSign[i1])
+                sy = sym.limit(sy,q2,i2,NumToSign[i2])
+                sy = sym.limit(sy,q3,i3,NumToSign[i3])
+                sy = sym.limit(sy,q4,i4,NumToSign[i4])
+                print(i1,i2,i3,i4,':',sy)
+                # print(sy)
+                # print("%.3f" % sy.subs(R,3).subs(T,5).subs(P,1).subs(S,0).subs(p1,0.5).subs(p2,0.5).subs(p3,0.5).subs(p4,0.5))
+

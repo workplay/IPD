@@ -43,5 +43,5 @@ for i in range(len(exprs)):
     if result == sat:
         print(i,s.model())
     else:
-        print(i,"unsat")
+        print(i,"unsat",s)
     s.pop()
