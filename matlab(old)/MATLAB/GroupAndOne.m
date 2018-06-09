@@ -1,0 +1,48 @@
+function [group,one] = GroupAndOne(p)
+    specific_q = [0.8,0.4,0.6,0.2];
+    
+    % boundary made by reactive strategies
+    boundary = zeros(2*2*2*2,4);
+    label_set = zeros(2*2*2*2,4);
+    for q1=0:1
+        for q2=0:1
+            for q3=0:1
+                for q4=0:1
+                    q=[q1,q2,q3,q4];
+                    index = q1*2*2*2 + q2*2*2 + q3*2 + q4 +1;
+                    label_set(index,:) = q;
+                    [cc,cd,dc,dd] = CalculateStationaryDistribution(p,q);
+                    boundary(index,:) = [cc,cd,dc,dd];
+                end;
+            end;
+        end;
+    end;
+
+    % make labels here.
+    labels = num2str(label_set);
+
+
+    myTitle = sprintf('IPD. X=%s incremental=0.1',num2str(p,'%.1f,'));
+    figure('Name',myTitle,'NumberTitle','off');
+    scatter(boundary(:,2)',boundary(:,3)','+','r');
+    hold on;
+
+   % x = boundary(:,2)';
+   % y = boundary(:,3)';
+   % k = convhull(x,y);
+   % plot(x(k),y(k),'r-')
+   % for i=1:size(k)
+   %     text(x(k(i)),y(k(i)),strrep(labels(k(i),:),' ',''));
+   % end;   
+    
+    % play against specific q
+    [cc,cd,dc,dd] = CalculateStationaryDistribution(p,specific_q);
+    specific_result = [cc,cd,dc,dd];
+    % scatter(cd,dc,'b');
+    
+    % xlabel('v2');
+    % ylabel('v3');    
+    
+    group = boundary(:,2:3);
+    one = specific_result(:,2:3);
+end
