@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 from z3 import *
+import time
+
+start_time = time.time()
+
 q1, q2, q3, q4 = Reals('q1 q2 q3 q4')
 p1, p2, p3, p4 = Reals('p1 p2 p3 p4')
 R, T, S, P = Reals('R T S P')
@@ -25,10 +29,10 @@ exprs = [f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15]
 
 # check for greatest
 check_index = 0
-comp_index = 1
+comp_list = [10, 11]
 
-s = Solver()
-s.set('timeout',1000)
+s = z3.Solver()
+s.set("timeout",60000)
 
 s.add(T>R, R>P, P>S)
 s.add(2*R > T+S)
@@ -48,13 +52,19 @@ s.add(p1 == p4)
 for i in range(len(exprs)):
     if (i == check_index):
         continue
-    #if (i != comp_index):
+    #if (i not in comp_list):
     #    continue
     s.push()
     s.add(exprs[check_index] < exprs[i])
     result = s.check()
-    if result == sat:
+    if result == z3.sat:
         print(i,s.model())
-    else:
+    elif result == z3.unsat:
         print(i,"unsat")
+    elif result == z3.unknown:
+        print(i,"unknown")
+    else:
+        print("error check result")
     s.pop()
+    
+print("--- %s seconds ---" % (time.time() - start_time))
