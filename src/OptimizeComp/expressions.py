@@ -22,3 +22,14 @@ f11 =  -(P*p1*p3 - P*p1 - P*p3 + P + R*p2*p3 - R*p3*p4 + R*p4 - S*p1 + S - T*p1*
 f15 =  (-R*p3 + S*p1 - S)/(p1 - p3 - 1)
 
 exprs = [f0, f1, f2, f3, f5, f6, f7, f9, f10, f11, f15]
+result = s.check()
+        if result == z3.sat:
+            print(i,"sat")
+            print(s.model())
+        elif result == z3.unsat:
+            print(i,"unsat")
+        elif result == z3.unknown:
+            print(i,"unknown")
+        else:
+            print("error check result")
+        s.pop()

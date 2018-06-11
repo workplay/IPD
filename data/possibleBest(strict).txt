@@ -1,0 +1,6 @@
+R = -1
+T = 0
+S = -3
+P = -2
+6 unsat, others sat(see bestResponses.xlsx)
+

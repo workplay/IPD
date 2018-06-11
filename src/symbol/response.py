@@ -17,7 +17,7 @@ def candvector():
 
 # calculate best response to strategy p
 def allresponse(p):
-    file = open(r'../data/response1111.csv','w')
+    file = open(r'../../data/response8462.csv','w')
     result = []
     candidates = candvector()
     for q1 in candidates:
@@ -33,6 +33,6 @@ def allresponse(p):
     return result
         
 def main():
-    result = allresponse([0.1,0.1,0.1,0.1])
+    result = allresponse([0.8,0.4,0.6,0.2])
 if __name__== "__main__":
     main()

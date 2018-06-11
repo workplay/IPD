@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+# -*- coding: utf-8 -*-
 from z3 import *
 import pandas as pd
 import time
@@ -15,15 +17,16 @@ df = pd.read_excel('SymbolicSubstraction.xlsx', sheet_name='Sheet1')
 s = z3.Solver()
 
 s.add(T>R, R>P, P>S)
-s.add(2*R > T+S)  # this constraint is not necessary.
+s.add(2*R > T+S)  
 s.add(p1>0,p1<1)
 s.add(p2>0,p2<1)
 s.add(p3>0,p3<1)
 s.add(p4>0,p4<1)
 
 s.add(p1 < p2)
-s.add(p1 == p3)
-s.add(p1 == p4)
+s.add(p1 < p4)
+# s.add(p3 < p2)
+s.add(p3 < p4)
 
 for i in range(1, df.shape[0]):
     s.push()
