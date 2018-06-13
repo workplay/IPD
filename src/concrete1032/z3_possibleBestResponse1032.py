@@ -2,6 +2,10 @@
 from z3 import *
 import pandas as pd
 
+def getFileName(R,S,T,P):
+    return "ConcreteSubstraction_%.0f%.0f%.0f%.0f.xlsx" %(_R,_S,_T,_P)
+
+
 # task: whether a strategy can be best response.
 p1, p2, p3, p4 = Reals('p1 p2 p3 p4')
 
@@ -21,21 +25,22 @@ duplicates = [4, 8]
 for i in range(6,7):
     if (i in duplicates):
         continue
-    s.push()
     for j in range(0, df.shape[0]):
         if (j != i) and (j not in duplicates):
         # careful: read data frame
+            print(i,j)    
+            s.push()
             f = eval(df.iat[i,j])
-            s.add(f > 0)
-    result = s.check()
-    if result == z3.sat:
-        print(i,"sat")
-        print(s.model())
-    elif result == z3.unsat:
-        print(i,"unsat")
-    elif result == z3.unknown:
-        print(i,"unknown")
-    else:
-        print("error check result")
-    s.pop()
+            s.add(f <= 0)
+            result = s.check()
+            if result == z3.sat:
+                print(i,"sat")
+                print(s.model())
+            elif result == z3.unsat:
+                print(i,"unsat")
+            elif result == z3.unknown:
+                print(i,"unknown")
+            else:
+                print("error check result")
+            s.pop()
     

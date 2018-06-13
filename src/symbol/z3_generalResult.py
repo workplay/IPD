@@ -46,8 +46,9 @@ s.add(q3>0,q3<1)
 s.add(q4>0,q4<1)
 
 s.add(p1 < p2)
-s.add(p1 == p3)
-s.add(p1 == p4)
+s.add(p1 < p4)
+# s.add(p3 < p2)
+s.add(p3 < p4)
 
 for i in range(len(exprs)):
     if (i == check_index):
