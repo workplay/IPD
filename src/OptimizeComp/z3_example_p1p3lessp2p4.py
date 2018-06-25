@@ -23,10 +23,10 @@ s.add(p2>0,p2<1)
 s.add(p3>0,p3<1)
 s.add(p4>0,p4<1)
 
-s.add(p1 <=0.5)
-#s.add(p1 < p4)
-# s.add(p3 < p2)
-# s.add(p3 < p4)
+s.add(p3>p4)
+s.add(p3>p2)
+s.add(p3>p1)
+s.add(p2>p1)
 
 for i in range(1, df.shape[0]):
     s.push()
