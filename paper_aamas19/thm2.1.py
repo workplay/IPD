@@ -4,6 +4,7 @@ import sympy as sym
 
 # check D1>=0 is satisfiable.
 def checkDeterminant(det_D_1):
+    print(det_D_1)
     p1, p2, p3, p4 = z3.Reals('p1 p2 p3 p4')
     q1, q2, q3, q4 = z3.Reals('q1 q2 q3 q4')
     R, T, S, P = z3.Reals('R T S P')

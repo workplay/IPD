@@ -6,15 +6,25 @@ import time
 start_time = time.time()
 
 p1, p2, p3, p4 = Reals('p1 p2 p3 p4')
-R, T, S, P = z3.Reals('R T S P')
+# R, T, S, P = z3.Reals('R T S P')
+R = 3
+S = 0
+T = 5
+P = 1
 
-k = 2 # k for chi
+# k = 2 # k for chi
+k = Real('k')
 m = Real('m') # m for phi
  
 p1 = 1 - m*(k-1)*(R-P)/(P-S)
-p2 = 1 - m*(1 + k*(T-P)/(P-S))
+# p2 = 1 - m*(1 + k*(T-P)/(P-S))
 p3 = m * (k + (T-P)/(P-S))
 p4 = 0
+
+p2 = 0
+
+# p3 = 0.5
+# p1 = 0.5
 
 df = pd.read_excel('./data/SymbolicSubstraction.xlsx', sheet_name='Sheet1')
  
@@ -23,7 +33,7 @@ s = z3.Solver()
 s.add(T>R, R>P, P>S)
 s.add(2*R > T+S)  # this constraint is not necessary.
 s.add(p1>0,p1<1)
-s.add(p2>0,p2<1)
+s.add(p2>=0,p2<1)
 s.add(p3>0,p3<1)
 # Previous we have assumed p4=0
 # s.add(p4>0,p4<1) 
@@ -32,6 +42,9 @@ s.add(p3>0,p3<1)
 s.add(k>1)
 s.add(m>0)
 s.add(m<(P-S)/((P-S)+k*(T-P)))
+
+
+# s.add(p2 <= 1 - m*(1 + k*(T-P)/(P-S)))
 
 # compare formula 12 with all others
 check_index = 12
