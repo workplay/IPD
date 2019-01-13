@@ -49,7 +49,7 @@ def getLimit():
                 sy = sym.limit(sy,q1,i1,NumToSign[i1])
                 sy = sym.limit(sy,q2,i2,NumToSign[i2])
 #                    sy = sym.limit(sy,q3,i3,NumToSign[i3])
-                sy = sym.limit(sy,q4,i4,NumToSign[i4])
+                sy = sym.limit(sy,q4,i4,NumToSign[i4])  
                 #print(i1,i2,i4,':',sy)      
                 checkDeterminant(str(sy))
                 

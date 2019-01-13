@@ -41,24 +41,24 @@ v2 = sym.det(D2)/sym.det(D)
 v3 = sym.det(D3)/sym.det(D)
 v4 = sym.det(D4)/sym.det(D)
 
-up = R*sym.det(D1) + T * sym.det(D2) + S * sym.det(D3) + P * sym.det(D4)
+up = R*sym.det(D1) + S * sym.det(D2) + T * sym.det(D3) + P * sym.det(D4)
 down = sym.det(D)
 result = up/down
 
 NumToSign = {1:'-',0:'+'}
 
-import sys
-sys.stdout = open(r'../../data/SymbolicResult.csv','wt')
+# import sys
+# sys.stdout = open(r'../../data/SymbolicResult.csv','wt')
 
 for i1 in range(2):
     for i2 in range(2):
         for i3 in range(2):
             for i4 in range(2):
                 sy = result
-                sy = sym.limit(sy,q1,i1,NumToSign[i1])
-                sy = sym.limit(sy,q2,i2,NumToSign[i2])
-                sy = sym.limit(sy,q3,i3,NumToSign[i3])
-                sy = sym.limit(sy,q4,i4,NumToSign[i4])
+                sy = sym.limit(sy,p1,i1,NumToSign[i1])
+                sy = sym.limit(sy,p2,i2,NumToSign[i2])
+                sy = sym.limit(sy,p3,i3,NumToSign[i3])
+                sy = sym.limit(sy,p4,i4,NumToSign[i4])
                 print(i1,i2,i3,i4,':',sy)
                 # print(sy)
                 # print("%.3f" % sy.subs(R,3).subs(T,5).subs(P,1).subs(S,0).subs(p1,0.5).subs(p2,0.5).subs(p3,0.5).subs(p4,0.5))

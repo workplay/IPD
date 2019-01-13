@@ -34,6 +34,9 @@ D2[:,1] = [[0],[0],[0],[1]]
 D3[:,2] = [[0],[0],[0],[1]]
 D4[:,3] = [[0],[0],[0],[1]]
 
+print(D)
+print(D1)
+
 v1 = sym.det(D1)/sym.det(D)
 v2 = sym.det(D2)/sym.det(D)
 v3 = sym.det(D3)/sym.det(D)
