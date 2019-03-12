@@ -30,7 +30,7 @@ exprs = [f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15]
 # check_index = 0
 # comp_list = [10, 11]
 
-f_check = f15
+f_check = f0
 for expr in exprs:
     s = z3.Solver()
     s.set("timeout",60000)
@@ -40,8 +40,8 @@ for expr in exprs:
     s.add(p2>0,p2<1)
     s.add(p3>0,p3<1)
     s.add(p4>0,p4<1)
-    s.add(p2 < (p1*(T-P)-(1+p4)*(T-R))/(R-P)) 
-    s.add(p3 == ((1-p1)*(P-S)+p4*(R-S))/(R-P))    
+    s.add(p2 == (p1*(T-P)-(1+p4)*(T-R))/(R-P)) 
+    s.add(p3 < ((1-p1)*(P-S)+p4*(R-S))/(R-P))    
     s.add(f_check <= expr)
     print(s.check())
     

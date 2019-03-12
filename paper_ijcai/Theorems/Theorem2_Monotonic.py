@@ -1,3 +1,13 @@
+"""
+   Theorem 2. Assume 0 <= pi <= 1 and that 0 < qi < 1, 
+        and p != (1,1,0,0).
+        When all other variables are fixed, 
+        s_X is monotonic to p1. (same to p2,p3,p4,q1,...,q4) 
+    
+    
+    The output of this program is 0. (it may take some time to get the result)
+"""
+
 import sympy as sym
 p1 = sym.Symbol('p1')
 p2 = sym.Symbol('p2')
@@ -27,7 +37,6 @@ D_1 = sym.Matrix( \
 
 up = sym.det(D_SY)
 down = sym.det(D_1)
-
 
 diff_up = sym.simplify(sym.diff(up,p1)*down - up * sym.diff(down, p1))
 print(sym.simplify(sym.diff(diff_up,p1)))
